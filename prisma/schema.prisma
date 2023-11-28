@@ -9,3 +9,31 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id       String       @id @unique
+  sessions Session[]
+  keys     AuthKey[]
+
+  name     String       @unique
+  email    String       @unique
+}
+
+model Session {
+  id             String   @id @unique
+  user_id        String
+  active_expires BigInt
+  idle_expires   BigInt
+  user           User @relation(references: [id], fields: [user_id], onDelete: Cascade)
+
+  @@index([user_id])
+}
+
+model AuthKey {
+  id              String   @id @unique
+  hashed_password String?
+  user_id         String
+  user            User @relation(references: [id], fields: [user_id], onDelete: Cascade)
+
+  @@index([user_id])
+}
