@@ -12,7 +12,9 @@ declare global {
       auth: import('lucia').AuthRequest;
       session: import('lucia').Session | null;
     }
-    // interface PageData {}
+    interface PageData {
+      flash?: { type: 'success' | 'error'; message: string };
+    }
     // interface Platform {}
   }
 }

@@ -5,6 +5,7 @@ import { fail, redirect } from '@sveltejs/kit';
 
 import { path } from '$lib';
 import { auth } from '$lib/server/lucia';
+import { setFlash } from 'sveltekit-flash-message/server';
 
 export const load = (async () => {
   const form = await superValidate(schema);
@@ -28,6 +29,7 @@ export const actions: Actions = {
       return fail(400, { form: { ...form, message: 'ログインエラー' } });
     }
 
+    setFlash({ type: 'success', message: 'ログインしました' }, event);
     throw redirect(302, path('/'));
   },
 };
