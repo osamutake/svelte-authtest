@@ -1,7 +1,7 @@
 import { auth } from '$lib/server/lucia';
 import { redirect, type Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
-import { path } from '$lib';
+import { path } from '$lib/server';
 import { setFlash } from 'sveltekit-flash-message/server';
 
 const authHandler: Handle = async ({ event, resolve }) => {

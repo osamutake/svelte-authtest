@@ -4,7 +4,7 @@ import { superValidate } from 'sveltekit-superforms/server';
 import { fail, redirect } from '@sveltejs/kit';
 import { auth } from '$lib/server/lucia';
 import { LuciaError } from 'lucia';
-import { path } from '$lib';
+import { path } from '$lib/server';
 import { setFlash } from 'sveltekit-flash-message/server';
 
 export const load = (async () => {

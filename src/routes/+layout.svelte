@@ -1,4 +1,5 @@
 <script lang="ts">
+  import '../app.pcss';
   import { getFlash } from 'sveltekit-flash-message';
   import { page } from '$app/stores';
   import toast, { Toaster } from 'svelte-french-toast';
@@ -23,5 +24,5 @@
   <div style:background-color={bg} class="flash">{$flash.message}</div>
 {/if}
 
-<Toaster />
+<Toaster></Toaster>
 <slot />

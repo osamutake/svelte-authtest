@@ -3,7 +3,7 @@ import { schema } from '$lib/zod/session/new';
 import { superValidate } from 'sveltekit-superforms/server';
 import { fail, redirect } from '@sveltejs/kit';
 
-import { path } from '$lib';
+import { path } from '$lib/server';
 import { auth } from '$lib/server/lucia';
 import { setFlash } from 'sveltekit-flash-message/server';
 

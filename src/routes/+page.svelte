@@ -3,8 +3,10 @@
   export let data: PageData;
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
-{#if data.user}
-  <p>Hello {data.user.name} !!</p>
-{/if}
+<content class="prose p-4">
+  <h1>Welcome to SvelteKit</h1>
+  <p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+  {#if data.user}
+    <p>Hello {data.user.name} !!</p>
+  {/if}
+</content>
