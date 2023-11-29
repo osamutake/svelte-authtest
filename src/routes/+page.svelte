@@ -11,6 +11,7 @@
     <ul>
       <li><a href={data.urlRoot + '/session/delete'}>ログアウト</a></li>
       <li><a href={data.urlRoot + '/account/email'}>メールアドレスを変更</a></li>
+      <li><a href={data.urlRoot + '/account/edit'}>ユーザー情報を変更</a></li>
     </ul>
   {:else}
     <ul>
