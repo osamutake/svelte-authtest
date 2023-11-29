@@ -8,9 +8,11 @@ async function main() {
   const commands = new Array(1000);
   for (let i = 0; i < items.length - 1; i += 1000) {
     for (let j = 0; j < 1000; j++) {
-      commands[j] = db.worstPassword.create({
-        data: {
-          value: items[i + j],
+      commands[j] = db.worstPassword.upsert({
+        where: { value: items[i + j].toLocaleLowerCase() },
+        update: {},
+        create: {
+          value: items[i + j].toLocaleLowerCase(),
           rank: i + j + 1,
         },
       });

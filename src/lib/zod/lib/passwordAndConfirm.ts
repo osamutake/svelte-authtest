@@ -28,7 +28,7 @@ export function passwordAndConfirm<KEYS extends string>(
     })
     .superRefine(async (data, ctx) => {
       const record = await db.worstPassword.findUnique({
-        where: { value: data.password },
+        where: { value: (data.password as object).toString().toLocaleLowerCase() },
         select: { rank: true },
       });
       if (record) {

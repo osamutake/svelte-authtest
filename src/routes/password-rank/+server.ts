@@ -4,7 +4,7 @@ import { db } from '$lib/server/db';
 export async function POST({ request }) {
   const { password } = await request.json();
   const record = await db.worstPassword.findUnique({
-    where: { value: password },
+    where: { value: password.toLocaleLowerCase() },
     select: { rank: true },
   });
   if (record) {
