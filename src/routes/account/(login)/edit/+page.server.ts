@@ -19,7 +19,7 @@ export const load = (async (event) => {
   return { form, user };
 }) satisfies PageServerLoad;
 
-export const actions: Actions = {
+export const actions = {
   default: async (event) => {
     // フォームデータのバリデーション
     const form = await superValidate(event, schema);
@@ -46,4 +46,4 @@ export const actions: Actions = {
     }
     throw redirect(302, '/', { type: 'success', message }, event);
   },
-};
+} satisfies Actions;

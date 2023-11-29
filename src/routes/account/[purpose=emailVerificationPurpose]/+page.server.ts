@@ -25,7 +25,7 @@ export const load = (async (event) => {
   return { form, purpose };
 }) satisfies PageServerLoad;
 
-export const actions: Actions = {
+export const actions = {
   default: async (event) => {
     // フォームデータのバリデーション
     const form = await superValidate(event, schema);
@@ -94,4 +94,4 @@ export const actions: Actions = {
     setFlash({ type: 'success', message: 'メールを送信しました' }, event);
     throw redirect(302, path('/'));
   },
-};
+} satisfies Actions;

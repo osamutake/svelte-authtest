@@ -12,7 +12,7 @@ export const load = (async () => {
   return { form };
 }) satisfies PageServerLoad;
 
-export const actions: Actions = {
+export const actions = {
   default: async (event) => {
     // フォームデータのバリデーション
     const form = await superValidate(event, schema);
@@ -32,4 +32,4 @@ export const actions: Actions = {
     setFlash({ type: 'success', message: 'ログインしました' }, event);
     throw redirect(302, path('/'));
   },
-};
+} satisfies Actions;
