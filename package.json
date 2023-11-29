@@ -6,13 +6,15 @@
     "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "npm run test:integration && npm run test:unit",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --check . && eslint .",
     "format": "prettier --write .",
-    "test:integration": "playwright test",
-    "test:unit": "vitest"
+    "test": "pnpm test:integration && pnpm test:unit",
+    "test-dev": "cross-env DATABASE_URL='file:test.db' prisma migrate deploy && cross-env DATABASE_URL='file:test.db' vite dev --port 4173",
+    "test-preview": "cross-env DATABASE_URL='file:test.db' prisma migrate deploy && cross-env DATABASE_URL='file:test.db' vite build && cross-env DATABASE_URL='file:test.db' vite preview --port 4173",
+    "test:integration": "cross-env DATABASE_URL='file:test.db' playwright test",
+    "test:unit": "cross-env DATABASE_URL='file:test.db' vitest"
   },
   "devDependencies": {
     "@playwright/test": "^1.40.0",
@@ -24,6 +26,7 @@
     "@typescript-eslint/eslint-plugin": "^6.13.1",
     "@typescript-eslint/parser": "^6.13.1",
     "autoprefixer": "^10.4.14",
+    "cross-env": "^7.0.3",
     "daisyui": "^4.4.14",
     "eslint": "^8.54.0",
     "eslint-config-prettier": "^9.0.0",
