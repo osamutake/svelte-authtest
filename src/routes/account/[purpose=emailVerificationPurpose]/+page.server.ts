@@ -1,4 +1,4 @@
-import type { Actions, PageServerLoad } from './$types';
+import type { Actions, PageServerLoad, PageServerLoadEvent, RequestEvent } from './$types';
 import { schema } from '$lib/zod/account/emailVerification';
 import { superValidate } from 'sveltekit-superforms/server';
 import { fail, redirect } from '@sveltejs/kit';
@@ -8,10 +8,20 @@ import { path } from '$lib/server';
 import { db } from '$lib/server/db';
 import { transporter } from '$lib/server/transporter';
 import { appName, appEmail } from '$lib';
+import { addErrorToForm } from '$lib/server';
+
+function getPurpose(event: PageServerLoadEvent | RequestEvent) {
+  const purpose = event.params.purpose as keyof typeof purposes;
+  if ((purpose == 'email') !== !!event.locals.session?.user) {
+    setFlash({ type: 'error', message: 'ログイン状態が無効です' }, event);
+    throw redirect(302, path('/'));
+  }
+  return purpose;
+}
 
 export const load = (async (event) => {
   const form = await superValidate(schema);
-  const purpose = event.params.purpose as keyof typeof purposes;
+  const purpose = getPurpose(event);
   return { form, purpose };
 }) satisfies PageServerLoad;
 
@@ -19,7 +29,23 @@ export const actions: Actions = {
   default: async (event) => {
     // フォームデータのバリデーション
     const form = await superValidate(event, schema);
-    const purpose = event.params.purpose as keyof typeof purposes;
+    const purpose = getPurpose(event);
+
+    // パスワードリセットは既存のアカウントがなければエラー
+    if (purpose == 'reset') {
+      if (!(await db.user.findUnique({ where: { email: form.data.email } }))) {
+        addErrorToForm(form, 'email', '登録されていません');
+      }
+    }
+
+    // メールアドレス変更は既存のアカウントがあければエラー
+    if (purpose == 'email') {
+      if (await db.user.findUnique({ where: { email: form.data.email } })) {
+        form.errors.email = [...(form.errors.email || []), '既存のアカウントと重複しています'];
+        form.valid = false;
+      }
+    }
+
     if (!form.valid) {
       return fail(400, { form, purpose });
     }
