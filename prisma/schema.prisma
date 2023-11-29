@@ -37,3 +37,11 @@ model AuthKey {
 
   @@index([user_id])
 }
+
+model emailVerification {
+  id String @id @default(uuid())
+  email String @unique
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("email-verification")
+}
