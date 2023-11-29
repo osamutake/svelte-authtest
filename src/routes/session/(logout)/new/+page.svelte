@@ -37,5 +37,12 @@
         >サインアップ</a
       >
     </p>
+    <p>
+      パスワードを忘れた場合は <a class="link link-primary" href={data.urlRoot + '/account/reset'}>
+        パスワードのリセット</a
+      >
+    </p>
+    <!-- svelte-ignore a11y-invalid-attribute -->
+    <p><a class="link link-primary" href="javascript:history.back();">前の画面に戻る</a></p>
   </Form>
 </Dialog>

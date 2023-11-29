@@ -28,8 +28,10 @@
     />
     <p>
       入力されたアドレスへリンクを含むメールを送信します<br />
-      そのリンクから {purpose} 手続きを進めて下さい
+      そのリンクから {purpose} 手続きを続けて下さい
     </p>
     <Button disabled={$submitting}>メールを送信</Button>
+    <!-- svelte-ignore a11y-invalid-attribute -->
+    <p><a class="link link-primary" href="javascript:history.back();">前の画面に戻る</a></p>
   </Form>
 </Dialog>
