@@ -17,6 +17,7 @@ model User {
 
   name     String       @unique
   email    String       @unique
+  roles    Role[]
 }
 
 model Session {
@@ -49,4 +50,12 @@ model emailVerification {
 model worstPassword {
   value String @id
   rank Int
+}
+
+ 
+model Role {
+  id             String   @id @default(uuid())
+  name           String   @unique
+
+  users          User[]
 }

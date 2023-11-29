@@ -8,6 +8,11 @@ const authHandler: Handle = async ({ event, resolve }) => {
   event.locals.auth = auth.handleRequest(event);
   event.locals.session = await event.locals.auth.validate();
 
+  if (event.route.id?.match(/\/\(admin\)\//) && !event.locals.session?.user) {
+    setFlash({ type: 'error', message: '管理者ユーザーのみアクセスできます' }, event);
+    throw redirect(302, path('/session/new'));
+  }
+
   if (event.route.id?.match(/\/\(login\)\//) && !event.locals.session?.user) {
     setFlash({ type: 'error', message: 'ログインユーザーのみアクセスできます' }, event);
     throw redirect(302, path('/session/new'));
