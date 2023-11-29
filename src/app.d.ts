@@ -14,6 +14,7 @@ declare global {
     }
     interface PageData {
       flash?: { type: 'success' | 'error'; message: string };
+      urlRoot: string;
     }
     // interface Platform {}
   }

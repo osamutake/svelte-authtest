@@ -32,5 +32,10 @@
       {errors}
     />
     <Button disabled={$submitting}>ログイン</Button>
+    <p>
+      アカウントをお持ちでなければ <a class="link link-primary" href={data.urlRoot + '/account/new'}
+        >サインアップ</a
+      >
+    </p>
   </Form>
 </Dialog>
