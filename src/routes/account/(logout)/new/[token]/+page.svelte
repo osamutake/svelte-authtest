@@ -6,6 +6,7 @@
   import InputText from '$lib/components/InputText.svelte';
   import InputPassword from '$lib/components/InputPassword.svelte';
   import Button from '$lib/components/Button.svelte';
+  import { verifyPassword } from '$lib/components/InputPasswordVerifier';
 
   export let data: PageData;
   const { form, message, errors, submitting, capture, restore, enhance } = superForm(data.form, {
@@ -30,6 +31,7 @@
       bind:value={$form.password}
       disabled={$submitting}
       {errors}
+      on:input={(e) => verifyPassword(e, errors)}
     />
     <InputPassword
       name="confirm"

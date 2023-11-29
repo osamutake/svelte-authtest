@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { db } from '$lib/server/db';
 
 export { z };
 export function passwordAndConfirm<KEYS extends string>(
@@ -24,5 +25,20 @@ export function passwordAndConfirm<KEYS extends string>(
     .refine(({ password, confirm }) => password === confirm, {
       message: '確認用パスワードが一致しません',
       path: ['confirm'],
+    })
+    .superRefine(async (data, ctx) => {
+      const record = await db.worstPassword.findUnique({
+        where: { value: data.password },
+        select: { rank: true },
+      });
+      if (record) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: `容易に推測可能なパスワードです (rank = ${record.rank})`,
+          fatal: true,
+          path: ['password'],
+        });
+        return z.NEVER;
+      }
     });
 }

@@ -7,7 +7,7 @@
   export let labelAlt: string = '';
   export let value: string;
   export let disabled = false;
-  export let errors: Writable<{}> | undefined = undefined;
+  export let errors: Writable<{ password?: string[] }> | undefined = undefined;
   export let props: svelteHTML.IntrinsicElements['input'] | undefined = undefined;
 </script>
 

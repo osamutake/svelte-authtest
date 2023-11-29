@@ -45,3 +45,8 @@ model emailVerification {
 
   @@map("email-verification")
 }
+
+model worstPassword {
+  value String @id
+  rank Int
+}
