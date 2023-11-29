@@ -23,14 +23,7 @@
       disabled={$submitting}
       {errors}
     />
-    <InputText
-      name="email"
-      label="メールアドレス"
-      bind:value={$form.email}
-      disabled={$submitting}
-      {errors}
-      props={{ placeholder: 'account@example.com' }}
-    />
+    <InputText name="email" label="メールアドレス" bind:value={data.email} disabled />
     <InputPassword
       name="password"
       label="パスワード"
