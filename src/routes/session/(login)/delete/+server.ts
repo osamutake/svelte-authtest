@@ -1,6 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { path } from '$lib/server';
+import { path } from '$lib';
 import { setFlash } from 'sveltekit-flash-message/server';
 
 export const GET: RequestHandler = async ({ locals, cookies }) => {

@@ -1,8 +1,4 @@
 // place files you want to import through the `$lib/server` alias in this folder.
-export const urlRoot = process.env['URL_ROOT'] || '';
-export function path(relative: string) {
-  return urlRoot + relative;
-}
 
 // superforms の form コントロールにエラーメッセージを追加する
 // 使用例：formAddError(form, 'email', 'そのアドレスは使えません');

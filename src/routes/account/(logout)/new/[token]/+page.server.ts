@@ -4,7 +4,7 @@ import { superValidate } from 'sveltekit-superforms/server';
 import { fail, redirect } from '@sveltejs/kit';
 import { auth } from '$lib/server/lucia';
 import { LuciaError } from 'lucia';
-import { path } from '$lib/server';
+import { path } from '$lib';
 import { setFlash } from 'sveltekit-flash-message/server';
 import { db } from '$lib/server/db';
 import { addRoles } from '$lib/server/role';

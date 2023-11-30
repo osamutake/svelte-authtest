@@ -6,6 +6,7 @@
   import InputText from '$lib/components/InputText.svelte';
   import InputPassword from '$lib/components/InputPassword.svelte';
   import Button from '$lib/components/Button.svelte';
+  import { path } from '$lib';
 
   export let data: PageData;
   const { form, message, errors, submitting, capture, restore, enhance } = superForm(data.form, {
@@ -33,12 +34,12 @@
     />
     <Button disabled={$submitting}>ログイン</Button>
     <p>
-      アカウントをお持ちでなければ <a class="link link-primary" href={data.urlRoot + '/account/new'}
+      アカウントをお持ちでなければ <a class="link link-primary" href={path('/account/new')}
         >サインアップ</a
       >
     </p>
     <p>
-      パスワードを忘れた場合は <a class="link link-primary" href={data.urlRoot + '/account/reset'}>
+      パスワードを忘れた場合は <a class="link link-primary" href={path('/account/reset')}>
         パスワードのリセット</a
       >
     </p>

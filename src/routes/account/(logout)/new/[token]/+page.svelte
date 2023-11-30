@@ -7,6 +7,7 @@
   import InputPassword from '$lib/components/InputPassword.svelte';
   import Button from '$lib/components/Button.svelte';
   import { verifyPassword } from '$lib/components/InputPasswordVerifier';
+  import { path } from '$lib';
 
   export let data: PageData;
   const { form, message, errors, submitting, capture, restore, enhance } = superForm(data.form, {
@@ -42,9 +43,7 @@
     />
     <Button disabled={$submitting}>サインアップ</Button>
     <p>
-      アカウントをお持ちなら <a class="link link-primary" href={data.urlRoot + '/session/new'}
-        >ログイン</a
-      >
+      アカウントをお持ちなら <a class="link link-primary" href={path('/session/new')}>ログイン</a>
     </p>
   </Form>
 </Dialog>

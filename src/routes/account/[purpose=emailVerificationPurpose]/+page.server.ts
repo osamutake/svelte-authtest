@@ -4,7 +4,7 @@ import { superValidate } from 'sveltekit-superforms/server';
 import { fail, redirect } from '@sveltejs/kit';
 import { setFlash } from 'sveltekit-flash-message/server';
 import { purposes } from '$params/emailVerificationPurpose';
-import { path } from '$lib/server';
+import { path } from '$lib';
 import { db } from '$lib/server/db';
 import { transporter } from '$lib/server/transporter';
 import { appName, appEmail } from '$lib';

@@ -6,7 +6,7 @@ import { setFlash } from 'sveltekit-flash-message/server';
 import { addErrorToForm } from '$lib/server';
 import { db } from '$lib/server/db';
 import { articleFromTitleOrId } from '../../articleFromTitleOrId';
-import { path } from '../../../lib-server';
+import { path } from '../../../lib';
 
 export const load = (async (event) => {
   // article を取り出して、必要なら最新版のページへ飛ぶ

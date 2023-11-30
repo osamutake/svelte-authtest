@@ -5,7 +5,7 @@ import { fail, redirect } from '@sveltejs/kit';
 import { setFlash } from 'sveltekit-flash-message/server';
 import { addErrorToForm } from '$lib/server';
 import { db } from '$lib/server/db';
-import { path } from '../../lib-server';
+import { path } from '../../lib';
 
 export const load = (async () => {
   const form = await superValidate(schema);

@@ -1,11 +1,5 @@
 import type { Article, User } from '@prisma/client';
 import { db } from '$lib/server/db';
-import { path as stringPath } from '$lib/server';
-import { encodeTitle } from './lib';
-
-export function path(article: Article) {
-  return stringPath('/articles/' + encodeTitle(article.title));
-}
 
 export async function getNewest(article: (Article & { author: User }) | number | null) {
   if (!article) {

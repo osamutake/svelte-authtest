@@ -1,7 +1,7 @@
 import type { PageServerLoad } from './$types';
 import { redirect } from '@sveltejs/kit';
 import { articleFromTitleOrId } from './articleFromTitleOrId';
-import { path } from '../lib-server';
+import { path } from '../lib';
 
 export const load = (async (event) => {
   const { article, needRedirect } = await articleFromTitleOrId(event.params.titleOrId);

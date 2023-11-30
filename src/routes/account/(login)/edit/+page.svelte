@@ -7,6 +7,7 @@
   import InputPassword from '$lib/components/InputPassword.svelte';
   import Button from '$lib/components/Button.svelte';
   import { verifyPassword } from '$lib/components/InputPasswordVerifier';
+  import { path } from '$lib';
 
   export let data: PageData;
   const { form, message, errors, submitting, capture, restore, enhance } = superForm(data.form, {
@@ -44,14 +45,11 @@
     />
     <Button disabled={$submitting}>ユーザー情報を変更</Button>
     <p>
-      アカウントをお持ちなら <a class="link link-primary" href={data.urlRoot + '/session/new'}
-        >ログイン</a
-      >
+      アカウントをお持ちなら <a class="link link-primary" href={path('/session/new')}>ログイン</a>
     </p>
     <p>
-      メールアドレスを変更するには <a
-        class="link link-primary"
-        href={data.urlRoot + '/session/email'}>メールアドレスの変更</a
+      メールアドレスを変更するには <a class="link link-primary" href={path('/session/email')}
+        >メールアドレスの変更</a
       >
     </p>
     <!-- svelte-ignore a11y-invalid-attribute -->

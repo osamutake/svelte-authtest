@@ -2,7 +2,7 @@ import type { Actions, PageServerLoad, PageServerLoadEvent, RequestEvent } from 
 import { setFlash } from 'sveltekit-flash-message/server';
 import { db } from '$lib/server/db';
 import { redirect } from '@sveltejs/kit';
-import { path } from '$lib/server';
+import { path } from '$lib';
 
 async function getEmailAndUser(event: PageServerLoadEvent | RequestEvent) {
   const record = await db.emailVerification.findUnique({ where: { id: event.params.token } });

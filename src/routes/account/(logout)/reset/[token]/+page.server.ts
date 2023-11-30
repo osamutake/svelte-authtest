@@ -5,7 +5,7 @@ import { fail, redirect } from '@sveltejs/kit';
 import { setFlash } from 'sveltekit-flash-message/server';
 import { auth } from '$lib/server/lucia';
 import { db } from '$lib/server/db';
-import { path } from '$lib/server';
+import { path } from '$lib';
 
 async function getUser(event: PageServerLoadEvent | RequestEvent) {
   const record = await db.emailVerification.findUnique({ where: { id: event.params.token } });
