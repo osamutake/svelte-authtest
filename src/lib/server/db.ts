@@ -1,4 +1,4 @@
-import { PrismaClient, type Article, type User } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 
 export class ExtendedPrismaClient extends PrismaClient {
   constructor() {
@@ -48,36 +48,6 @@ export class ExtendedPrismaClient extends PrismaClient {
         },
       },
     });
-  }
-
-  articleTitleEncode(title: string) {
-    return title
-      .split('/')
-      .map((str) => encodeURIComponent(str).replaceAll('%20', '+'))
-      .join('/');
-  }
-
-  articleTitleDecode(encoded: string) {
-    return encoded
-      .split('/')
-      .map((str) => decodeURIComponent(str.replaceAll('+', '%20')))
-      .join('/');
-  }
-
-  async newestArticle(article: (Article & { author: User }) | number | null) {
-    if (!article) {
-      return null;
-    }
-    while (typeof article == 'number' || article?.newRevisionId) {
-      article = await this.article.findUnique({
-        where: {
-          id: typeof article == 'number' ? article : article.newRevisionId!,
-          deletedAt: null,
-        },
-        include: { author: true },
-      });
-    }
-    return article;
   }
 }
 

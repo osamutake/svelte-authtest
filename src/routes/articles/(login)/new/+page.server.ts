@@ -3,8 +3,9 @@ import { schema } from '../../zod-schema';
 import { superValidate } from 'sveltekit-superforms/server';
 import { fail, redirect } from '@sveltejs/kit';
 import { setFlash } from 'sveltekit-flash-message/server';
-import { path, addErrorToForm } from '$lib/server';
+import { addErrorToForm } from '$lib/server';
 import { db } from '$lib/server/db';
+import { path } from '../../lib-server';
 
 export const load = (async () => {
   const form = await superValidate(schema);

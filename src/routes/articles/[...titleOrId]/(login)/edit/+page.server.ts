@@ -3,9 +3,10 @@ import { schema } from '../../../zod-schema';
 import { superValidate } from 'sveltekit-superforms/server';
 import { fail, redirect } from '@sveltejs/kit';
 import { setFlash } from 'sveltekit-flash-message/server';
-import { path, addErrorToForm } from '$lib/server';
+import { addErrorToForm } from '$lib/server';
 import { db } from '$lib/server/db';
 import { articleFromTitleOrId } from '../../articleFromTitleOrId';
+import { path } from '../../../lib-server';
 
 export const load = (async (event) => {
   // article を取り出して、必要なら最新版のページへ飛ぶ
