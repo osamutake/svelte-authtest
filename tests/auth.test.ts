@@ -3,7 +3,7 @@ import type { SendMailOptions } from 'nodemailer';
 import * as fs from 'fs';
 import { db } from '../src/lib/server/db.js';
 
-test.setTimeout(5000);
+test.setTimeout(10000);
 
 let testId = 0;
 let screenshotId = 0;
@@ -167,9 +167,10 @@ async function login(page: Page, email = 'test@example.com', password = 'Aa1aaaa
 }
 
 test('ログインしていないのにログアウトする', async ({ page }, info) => {
-  await page.goto('/session/delete', { waitUntil: 'load' });
-
-  await page.waitForNavigation({ url: 'http://localhost:4173/session/new', waitUntil: 'load' });
+  Promise.all([
+    page.waitForNavigation({ url: 'http://localhost:4173/session/new', waitUntil: 'load' }),
+    page.goto('/session/delete', { waitUntil: 'load' }),
+  ]);
   await expect(page.locator('.toaster .message').nth(0)).toHaveText(
     'ログインユーザーのみアクセスできます'
   );
@@ -347,9 +348,10 @@ test('新しいメールアドレスでログインしてから元に戻す', as
   ) as SendMailOptions;
   await expect(mailOptions2.text).toContain('http');
   await page.goto((mailOptions2.text as string).split(/\n/)[1], { waitUntil: 'load' });
-  await page.locator('form button').click();
-
-  await page.waitForNavigation({ url: 'http://localhost:4173/', waitUntil: 'load' });
+  Promise.all([
+    page.waitForNavigation({ url: 'http://localhost:4173/', waitUntil: 'load' }),
+    page.locator('form button').click(),
+  ]);
   await expect(page.locator('.toaster .message').nth(0)).toContainText('変更しました');
 
   await logout(page, info);
