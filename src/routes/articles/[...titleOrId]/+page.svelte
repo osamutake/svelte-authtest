@@ -5,6 +5,7 @@
   import { markedHighlight } from 'marked-highlight';
   import hljs from 'highlight.js';
   import markedKatex from 'marked-katex-extension';
+  import { page } from '$app/stores';
 
   import 'highlight.js/styles/stackoverflow-dark.min.css';
 
@@ -38,6 +39,7 @@
   <div>
     <span>{data.article.author.name}</span>
     <span>{data.article.createdAt.toLocaleString()}</span>
+    <span><a href={$page.url + '/edit'}>編集</a></span>
   </div>
   <content>
     {@html marked.parse(data.article.body)}

@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { PageData } from './$types';
   import { superForm } from 'sveltekit-superforms/client';
-  import ArticleEditor from '../../ArticleEditor.svelte';
+  import ArticleEditor from '../../../ArticleEditor.svelte';
 
   export let data: PageData;
   const { form, message, errors, submitting, capture, restore, enhance } = superForm(data.form, {
@@ -11,8 +11,8 @@
 </script>
 
 <ArticleEditor
-  formTitle="記事の投稿"
-  submitTitle="記事を投稿"
+  formTitle="記事を編集"
+  submitTitle="編集を反映"
   {...{ message: $message, enhance, disabled: $submitting, errors }}
   bind:title={$form.title}
   bind:body={$form.body}
