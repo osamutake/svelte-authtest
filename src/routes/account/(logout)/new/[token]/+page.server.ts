@@ -7,6 +7,7 @@ import { LuciaError } from 'lucia';
 import { path } from '$lib/server';
 import { setFlash } from 'sveltekit-flash-message/server';
 import { db } from '$lib/server/db';
+import { addRoles } from '$lib/server/role';
 
 async function getEmail(event: PageServerLoadEvent | RequestEvent) {
   const record = await db.emailVerification.findUnique({ where: { id: event.params.token } });
@@ -49,7 +50,7 @@ export const actions = {
 
       // 最初のユーザーには admin 権限を持たせる
       if ((await db.user.count()) == 1) {
-        await db.addRoles(user.userId, 'admin');
+        await addRoles(user.userId, 'admin');
       }
 
       // そのままログイン状態にする
