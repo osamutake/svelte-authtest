@@ -18,6 +18,7 @@ model User {
   name     String       @unique
   email    String       @unique
   roles    Role[]
+  articles Article[]
 }
 
 model Session {
@@ -58,4 +59,33 @@ model Role {
   name           String   @unique
 
   users          User[]
+}
+
+model Article {
+  id Int @id @default(autoincrement())
+  author User @relation(fields: [authorId], references: [id]) 
+  authorId String @map("author_id")
+  title String
+  body String
+  newRevisionId Int? @unique @map("new_revision_id")
+  oldRevision Article? @relation("ArticleRevision", fields: [newRevisionId], references: [id])
+  newRevision Article? @relation("ArticleRevision")
+  createdAt DateTime @default(now()) @map("created_at")
+  deletedAt DateTime? @map("deleted_at")
+  attachments Attachment[]
+
+  @@index([deletedAt, title, createdAt])
+  @@index([newRevisionId, deletedAt, title])
+  @@index([newRevisionId, deletedAt, createdAt])
+}
+
+model Attachment {
+  id String @ id @default(uuid())
+  article Article @relation(fields: [articleId], references: [id])
+  articleId Int
+  body Bytes
+  createdAt DateTime @default(now()) @map("created_at")
+  modifiedAt DateTime @default(now()) @map("modified_at")
+
+  @@index([articleId])
 }
