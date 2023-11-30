@@ -1,5 +1,5 @@
 import type { Actions, PageServerLoad } from './$types';
-import { schema } from '$lib/zod/session/new';
+import { schema } from './zod-schema';
 import { superValidate } from 'sveltekit-superforms/server';
 import { fail, redirect } from '@sveltejs/kit';
 

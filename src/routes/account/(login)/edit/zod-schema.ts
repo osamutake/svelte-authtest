@@ -1,4 +1,4 @@
-import { z, passwordAndConfirm } from '$lib/zod/lib/passwordAndConfirm';
+import { z, passwordAndConfirm } from '../../zod-passwordAndConfirm';
 
 export const schema = passwordAndConfirm(
   {
