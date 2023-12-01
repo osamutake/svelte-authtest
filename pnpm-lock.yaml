@@ -14,6 +14,9 @@ dependencies:
   highlight.js:
     specifier: ^11.9.0
     version: 11.9.0
+  highlightjs-svelte:
+    specifier: ^1.0.6
+    version: 1.0.6
   lucia:
     specifier: ^2.7.4
     version: 2.7.4
@@ -23,9 +26,6 @@ dependencies:
   marked-base-url:
     specifier: ^1.1.2
     version: 1.1.2(marked@11.0.0)
-  marked-highlight:
-    specifier: ^2.0.8
-    version: 2.0.8(marked@11.0.0)
   marked-katex-extension:
     specifier: ^4.0.5
     version: 4.0.5(marked@11.0.0)
@@ -1718,6 +1718,10 @@ packages:
     engines: {node: '>=12.0.0'}
     dev: false
 
+  /highlightjs-svelte@1.0.6:
+    resolution: {integrity: sha512-aXuBPz8df3sOXg90q8rRcBLyxIR8ozPU39a6tJ2rpJUjjd9brRIr55aC0IccW4gsPhQxZ+B3rFugdXsg9/ckDw==}
+    dev: false
+
   /ignore@5.3.0:
     resolution: {integrity: sha512-g7dmpshy+gD7mh88OC9NwSGTKoc3kyLAZQRU1mt53Aw/vnvfXnbC+F/7F7QoYVKbV+KNvJx8wArewKy1vXMtlg==}
     engines: {node: '>= 4'}
@@ -1950,14 +1954,6 @@ packages:
     resolution: {integrity: sha512-Rgnd6tGrVhyPgQzPvKt1vBA3eUAHNtAXBJ/Xf30/e9kHufBqDK283HTqW9cPinV8lNcIVQ+JLSUwZnEPchyx6Q==}
     peerDependencies:
       marked: '>= 4 < 12'
-    dependencies:
-      marked: 11.0.0
-    dev: false
-
-  /marked-highlight@2.0.8(marked@11.0.0):
-    resolution: {integrity: sha512-AcZbUPXMODcR504hOaGwGuiYJcPcWyxJIKjIY/a7xLC9e2q9MBG/yDJvon/6W7xTzvk9RDf3nE2w1FNLQG4diA==}
-    peerDependencies:
-      marked: '>=4 <12'
     dependencies:
       marked: 11.0.0
     dev: false
