@@ -22,8 +22,15 @@
   // 見出しの階層を1つ下げる
   marked.use({
     renderer: {
+      // modified from marked-custom-heading-id
+      // https://www.npmjs.com/package/marked-custom-heading-id
       heading(text, level, raw) {
-        return vanillaRenderer.heading(text, level + 1, raw);
+        const headingIdRegex = /\{#([a-z][\w-]*)\}(?: +|$)/i;
+        const hasId = text.match(headingIdRegex);
+        if (!hasId) {
+          return vanillaRenderer.heading(text, level + 1, raw);
+        }
+        return `<h${level + 1} id="${hasId[1]}">${text.replace(headingIdRegex, '')}</h${level}>\n`;
       },
     },
   });
